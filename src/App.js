@@ -1,8 +1,6 @@
-import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Container, Button } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import ProductList from "./components/productList";
-
 
 function App() {
   return (

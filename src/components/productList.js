@@ -10,8 +10,15 @@ import { DataContext } from "../context/dataContext";
 export default function ProductList() {
   const diff = require("diff-arrays-of-objects");
   const { originalProductList, colorList } = useContext(DataContext);
+  const myArray =
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("productlist"))
+      : [];
+
   const [productList, setProductList] = useState(
-    JSON.parse(JSON.stringify(originalProductList))
+    myArray && myArray.length > 0
+      ? myArray
+      : JSON.parse(JSON.stringify(originalProductList))
   );
   const [pageNumber, setPageNumber] = useState(0);
   const productPerPage = 10;
@@ -95,10 +102,11 @@ export default function ProductList() {
         <h5>Jason - Re-upload Error Products</h5>
         <ModalResult
           updatedArr={diff(originalProductList, productList).updated}
+          resultArr={productList}
         ></ModalResult>
       </Container>
       <Container className="mt-3">
-        <Table bordered hover responsive>
+        <Table bordered hover responsive variant="dark">
           <thead>
             <tr>
               <th>ID</th>
